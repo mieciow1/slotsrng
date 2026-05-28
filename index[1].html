@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slots RNG</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loading-screen">
+    <h1 class="logo">SLOTS RNG</h1>
+  </div>
+
+  <div class="background-glow"></div>
+
+  <header>
+    <div>
+      <h1>SLOTS RNG</h1>
+      <p id="online-count">Players Online: 0</p>
+    </div>
+
+    <div class="top-right">
+      <div class="coins">🪙 <span id="coins">0</span></div>
+      <div class="luck">🍀 Luck x<span id="luck">1</span></div>
+    </div>
+  </header>
+
+  <main>
+    <aside>
+      <button onclick="openInventory()">Inventory</button>
+      <button onclick="buyLuck()">Upgrade Luck<br><small id="luck-cost" class="btn-cost"></small></button>
+      <button onclick="rebirth()">Rebirth<br><small id="rebirth-cost" class="btn-cost"></small></button>
+      <button onclick="claimDaily()">Daily Reward</button>
+      <button onclick="redeemCode()">Redeem Code</button>
+      <button onclick="toggleAutoSpin()">Auto Spin</button>
+      <button onclick="toggleFastSpin()">Fast Spin</button>
+      <button onclick="openLeaderboard()" class="btn-leaderboard">🏆 Leaderboard</button>
+      <button onclick="openAuthModal()" id="auth-btn">🔑 Log In</button>
+    </aside>
+
+    <section class="game-area">
+      <div class="reels">
+        <div class="reel" id="reel1">❔</div>
+        <div class="reel" id="reel2">❔</div>
+        <div class="reel" id="reel3">❔</div>
+      </div>
+
+      <button id="spin-btn" onclick="spin()">SPIN</button>
+
+      <div class="stats">
+        <p>Total Spins: <span id="spins">0</span></p>
+        <p>Jackpots: <span id="jackpots">0</span></p>
+        <p>Rebirths: <span id="rebirths">0</span></p>
+      </div>
+
+      <p id="player-label"></p>
+    </section>
+  </main>
+
+  <!-- Inventory modal -->
+  <div id="inventory" class="modal hidden">
+    <div class="modal-content">
+      <h2>Inventory</h2>
+      <div id="inventory-list"></div>
+      <button onclick="closeInventory()">Close</button>
+    </div>
+  </div>
+
+  <!-- Leaderboard modal -->
+  <div id="leaderboard-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>🏆 Global Leaderboard</h2>
+      <div id="leaderboard-list"><p>Loading...</p></div>
+      <div style="margin-top:16px;display:flex;gap:10px;">
+        <button onclick="submitScore()" style="flex:1;">Submit My Score</button>
+        <button onclick="closeLeaderboard()" style="flex:1;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth modal -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content" style="max-width:400px;">
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active" onclick="showTab('login')">Log In</button>
+        <button id="tab-register" class="tab-btn" onclick="showTab('register')">Register</button>
+      </div>
+
+      <div id="auth-form-login">
+        <p class="auth-hint">Log in to save your score to the global leaderboard.</p>
+        <input id="login-username" type="text" placeholder="Username" class="auth-input" />
+        <input id="login-password" type="password" placeholder="Password" class="auth-input" />
+        <p id="login-error" class="auth-error hidden"></p>
+        <button onclick="doLogin()" class="auth-submit">Log In</button>
+        <button onclick="closeAuthModal()" class="auth-skip">Play as Guest</button>
+      </div>
+
+      <div id="auth-form-register" class="hidden">
+        <p class="auth-hint">Create an account to appear on the global leaderboard.</p>
+        <input id="reg-username" type="text" placeholder="Username (2–20 chars)" maxlength="20" class="auth-input" />
+        <input id="reg-password" type="password" placeholder="Password (min 6 chars)" class="auth-input" />
+        <p id="reg-error" class="auth-error hidden"></p>
+        <button onclick="doRegister()" class="auth-submit">Create Account</button>
+        <button onclick="closeAuthModal()" class="auth-skip">Play as Guest</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="notification"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
